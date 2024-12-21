@@ -56,13 +56,13 @@ function convertUrl() {
                 if (isMobile()) {
                     const link = document.createElement('a');
                     link.href = newUrl;
-                    link.textContent = `${item.name} 통해 바로가기`;
+                    link.textContent = `${item.name}을 통해 가격 확인`;
                     link.className = 'result-link';
                     link.target = '_blank';
                     resultsDiv.appendChild(link);
                 } else {
                     const button = document.createElement('button');
-                    button.textContent = `${item.name} 링크 복사`;
+                    button.textContent = `${item.name}을 통해 가격 확인`;
                     button.className = 'result-button';
                     button.onclick = function() {
                         navigator.clipboard.writeText(newUrl).then(() => {
