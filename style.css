@@ -242,9 +242,30 @@ body {
     .results-container {
         width: 90%;
         padding: 10px;
+        margin: 10px auto;
     }
     
-    .result-button, .result-link {
+    .results-grid {
         width: 90%;
+        margin: 0 auto 35px;
+        padding: 0 15px;
+    }
+    
+    .result-button, 
+    .result-link {
+        width: 100%;
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    .recent-searches {
+        width: 90%;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+    
+    .recent-item {
+        width: auto;
+        margin: 5px;
     }
 }
