@@ -64,6 +64,7 @@ function saveRecentSearch(url) {
         timestamp: new Date().getTime()
     };
     
+    recentSearches = recentSearches.filter(item => item.url !== url);
     recentSearches.unshift(searchItem);
     recentSearches = recentSearches.slice(0, 5);
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
@@ -73,4 +74,10 @@ function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
     
-    const recentSearches = JSON.parse(localStorage
+    const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+    recentList.innerHTML = '';
+    
+    recentSearches.forEach(item => {
+        const button = document.createElement('button');
+        button.className = 'recent-item';
+        button.innerHTML = `<span
