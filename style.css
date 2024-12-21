@@ -53,8 +53,8 @@ body {
 }
 
 .search-container {
-    width: 100%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 450px;
     margin: 0 auto;
     position: relative;
 }
@@ -189,8 +189,8 @@ body {
 
 /* Recent searches styles */
 .recent-searches {
-    width: 100%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 450px;
     margin: 40px auto 0;
     text-align: center;
 }
@@ -225,8 +225,8 @@ body {
 
 /* FAQ styles */
 .faq-section {
-    width: 100%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 450px;
     margin: 40px auto;
 }
 
@@ -241,7 +241,8 @@ body {
     border: none;
     text-align: left;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15.4px;
+    font-weight: bold;
     color: #202124;
     display: flex;
     justify-content: space-between;
