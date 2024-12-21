@@ -55,6 +55,7 @@ body {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
+    position: relative;
 }
 
 .search-box-wrapper {
@@ -104,6 +105,16 @@ body {
     background-color: #303134;
 }
 
+.error-message {
+    color: #ea4335;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
 /* Results page styles */
 .results-container {
     text-align: center;
@@ -147,11 +158,9 @@ body {
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
 }
 
-#error-message {
+.copied-text {
     color: #ea4335;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 4px;
+    font-weight: bold;
 }
 
 .back-button {
@@ -240,15 +249,17 @@ body {
     }
     
     .results-container {
-        width: 90%;
+        width: 100%;
         padding: 10px;
         margin: 10px auto;
+        box-sizing: border-box;
     }
     
     .results-grid {
-        width: 90%;
+        width: 100%;
         margin: 0 auto 35px;
-        padding: 0 15px;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
     
     .result-button, 
@@ -256,16 +267,19 @@ body {
         width: 100%;
         margin: 0;
         font-size: 14px;
+        box-sizing: border-box;
     }
     
     .recent-searches {
-        width: 90%;
+        width: 100%;
         margin: 30px auto;
-        padding: 0 15px;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
     
     .recent-item {
-        width: auto;
+        display: inline-block;
         margin: 5px;
+        box-sizing: border-box;
     }
 }
