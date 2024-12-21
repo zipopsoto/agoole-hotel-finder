@@ -96,7 +96,16 @@ if (document.getElementById('search-form')) {
         const validation = validateUrl(urlInput.value);
         
         if (!validation.isValid) {
-            alert(validation.message);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = validation.message;
+            
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            document.querySelector('.search-container').appendChild(errorDiv);
             return;
         }
         
@@ -105,6 +114,14 @@ if (document.getElementById('search-form')) {
     });
     
     displayRecentSearches();
+}
+
+function showCopiedMessage(button) {
+    const originalText = button.textContent;
+    button.innerHTML = '<span class="copied-text">복사 완료!</span>';
+    setTimeout(() => {
+        button.textContent = originalText;
+    }, 2000);
 }
 
 // Results page functionality
@@ -155,7 +172,7 @@ function convertUrl() {
                     button.className = 'result-button';
                     button.onclick = function() {
                         navigator.clipboard.writeText(newUrl).then(() => {
-                            alert('링크가 클립보드에 복사되었습니다.');
+                            showCopiedMessage(this);
                         });
                     };
                     resultsDiv.appendChild(button);
