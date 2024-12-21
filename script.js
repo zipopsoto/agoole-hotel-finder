@@ -14,13 +14,17 @@ function getUrlParameter(name) {
 }
 
 function showLoading() {
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('results').style.display = 'none';
+    const loadingEl = document.getElementById('loading');
+    const resultsEl = document.getElementById('results');
+    if (loadingEl) loadingEl.style.display = 'block';
+    if (resultsEl) resultsEl.style.display = 'none';
 }
 
 function hideLoading() {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('results').style.display = 'block';
+    const loadingEl = document.getElementById('loading');
+    const resultsEl = document.getElementById('results');
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (resultsEl) resultsEl.style.display = 'block';
 }
 
 function validateUrl(url) {
@@ -41,13 +45,22 @@ function validateUrl(url) {
     }
 }
 
+function getHotelTitle(url) {
+    try {
+        const urlObj = new URL(url);
+        const pathParts = urlObj.pathname.split('/');
+        const hotelName = pathParts[2] || '호텔';
+        return hotelName.replace(/-/g, ' ').replace('.html', '');
+    } catch (error) {
+        return '알 수 없는 호텔';
+    }
+}
+
 function saveRecentSearch(url) {
     let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
-    const urlObj = new URL(url);
-    const hotelPath = urlObj.pathname.split('/')[2] || '호텔';
     const searchItem = {
         url: url,
-        title: hotelPath.replace(/-/g, ' ').replace('.html', ''),
+        title: getHotelTitle(url),
         timestamp: new Date().getTime()
     };
     
@@ -60,100 +73,4 @@ function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
     
-    const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
-    recentList.innerHTML = '';
-    
-    recentSearches.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'recent-item';
-        div.innerHTML = `
-            <div class="recent-item-title">${item.title}</div>
-            <div class="recent-item-url">${item.url}</div>
-        `;
-        div.onclick = () => {
-            document.getElementById('url-input').value = item.url;
-        };
-        recentList.appendChild(div);
-    });
-}
-
-// Initialize
-if (document.getElementById('search-form')) {
-    document.getElementById('search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const urlInput = document.getElementById('url-input');
-        const validation = validateUrl(urlInput.value);
-        
-        if (!validation.isValid) {
-            alert(validation.message);
-            return;
-        }
-        
-        saveRecentSearch(urlInput.value);
-        window.location.href = `results.html?url=${encodeURIComponent(urlInput.value)}`;
-    });
-    
-    displayRecentSearches();
-}
-
-// Results page
-if (document.getElementById('results')) {
-    convertUrl();
-}
-
-function convertUrl() {
-    showLoading();
-
-    setTimeout(() => {
-        const inputUrl = getUrlParameter('url');
-        const resultsDiv = document.getElementById('results');
-        const errorDiv = document.getElementById('error-message');
-        resultsDiv.innerHTML = '';
-        errorDiv.innerHTML = '';
-
-        if (!inputUrl) {
-            errorDiv.textContent = 'URL을 입력해주세요.';
-            hideLoading();
-            return;
-        }
-
-        try {
-            const urlObj = new URL(inputUrl);
-            const params = new URLSearchParams(urlObj.search);
-
-            if (!params.has('cid')) {
-                errorDiv.textContent = '입력하신 링크는 아고다 호텔이 아닌 것 같아요.';
-                hideLoading();
-                return;
-            }
-
-            cidList.forEach(item => {
-                params.set('cid', item.cid);
-                const newUrl = `${urlObj.origin}${urlObj.pathname}?${params.toString()}`;
-                
-                if (isMobile()) {
-                    const link = document.createElement('a');
-                    link.href = newUrl;
-                    link.textContent = `${item.name}을 통해 가격 확인`;
-                    link.className = 'result-link';
-                    link.target = '_blank';
-                    resultsDiv.appendChild(link);
-                } else {
-                    const button = document.createElement('button');
-                    button.textContent = `${item.name}을 통해 가격 확인`;
-                    button.className = 'result-button';
-                    button.onclick = function() {
-                        navigator.clipboard.writeText(newUrl).then(() => {
-                            alert('링크가 클립보드에 복사되었습니다.');
-                        });
-                    };
-                    resultsDiv.appendChild(button);
-                }
-            });
-        } catch (error) {
-            errorDiv.textContent = '올바른 URL을 입력해주세요.';
-        }
-        
-        hideLoading();
-    }, 1000);
-}
+    const recentSearches = JSON.parse(localStorage
