@@ -125,6 +125,7 @@ body {
     gap: 35px;
     width: 100%;
     align-items: center;
+    margin-bottom: 35px;
 }
 
 .result-button, .result-link {
@@ -155,8 +156,7 @@ body {
 
 .back-button {
     display: inline-block;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px 0;
     padding: 10px 20px;
     background-color: #202124;
     color: white;
@@ -177,28 +177,28 @@ body {
 
 /* Recent searches styles */
 .recent-searches {
-    margin-top: 40px;
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     margin: 40px auto 0;
+    text-align: center;
 }
 
 .recent-searches h3 {
     color: #202124;
     font-size: 16px;
     margin-bottom: 15px;
-    text-align: left;
+    text-align: center;
 }
 
 .recent-item {
-    padding: 15px;
-    margin-bottom: 10px;
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
     background-color: #f8f9fa;
     border: 1px solid #dfe1e5;
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
-    text-align: left;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .recent-item:hover {
@@ -207,7 +207,7 @@ body {
 }
 
 .recent-item-title {
-    color: #1a0dab;
+    color: #202124;
     font-size: 14px;
 }
 
