@@ -143,6 +143,7 @@ body {
 .result-button, .result-link {
     width: 90%;
     padding: 15px 20px;
+    margin: 20px 0;  /* 상하 여백 추가 */
     background-color: #f8f9fa;
     border: 1px solid #dfe1e5;
     border-radius: 8px;
