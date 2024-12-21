@@ -88,6 +88,14 @@ function displayRecentSearches() {
     });
 }
 
+function showCopiedMessage(button) {
+    const originalText = button.textContent;
+    button.innerHTML = '<span class="copied-text">복사 완료!</span>';
+    setTimeout(() => {
+        button.textContent = originalText;
+    }, 2000);
+}
+
 // Initialize form validation and recent searches
 if (document.getElementById('search-form')) {
     document.getElementById('search-form').addEventListener('submit', function(e) {
@@ -114,14 +122,6 @@ if (document.getElementById('search-form')) {
     });
     
     displayRecentSearches();
-}
-
-function showCopiedMessage(button) {
-    const originalText = button.textContent;
-    button.innerHTML = '<span class="copied-text">복사 완료!</span>';
-    setTimeout(() => {
-        button.textContent = originalText;
-    }, 2000);
 }
 
 // Results page functionality
