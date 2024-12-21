@@ -1,11 +1,28 @@
-// 기존 코드 유지
 const cidList = [
     { name: "구글맵", cid: "1833981" },
     { name: "국민카드", cid: "1917614" },
     { name: "신한카드", cid: "1829968" }
 ];
 
-// URL 유효성 검사 함수
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+function showLoading() {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('results').style.display = 'none';
+}
+
+function hideLoading() {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+}
+
 function validateUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -24,7 +41,6 @@ function validateUrl(url) {
     }
 }
 
-// 최근 검색 기록 저장
 function saveRecentSearch(url) {
     let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
     const urlObj = new URL(url);
@@ -40,7 +56,6 @@ function saveRecentSearch(url) {
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
 }
 
-// 최근 검색 기록 표시
 function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
@@ -62,29 +77,7 @@ function displayRecentSearches() {
     });
 }
 
-// 폼 제출 이벤트 처리
-if (document.getElementById('search-form')) {
-    document.getElementById('search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const urlInput = document.getElementById('url-input');
-        const validation = validateUrl(urlInput.value);
-        
-        if (!validation.isValid) {
-            alert(validation.message);
-            return;
-        }
-        
-        saveRecentSearch(urlInput.value);
-        this.submit();
-    });
-}
+function convertUrl() {
+    showLoading();
 
-// 페이지 로드시 최근 검색 기록 표시
-window.onload = function() {
-    if (document.getElementById('recent-list')) {
-        displayRecentSearches();
-    }
-    if (document.getElementById('results')) {
-        convertUrl();
-    }
-};
+    setTimeout
