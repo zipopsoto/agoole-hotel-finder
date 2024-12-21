@@ -143,7 +143,7 @@ body {
 .result-button, .result-link {
     width: 90%;
     padding: 15px 20px;
-    margin: 10px 0;  /* 상하 여백 추가 */
+    margin: 10px 0;
     background-color: #f8f9fa;
     border: 1px solid #dfe1e5;
     border-radius: 8px;
@@ -223,6 +223,59 @@ body {
     font-size: 14px;
 }
 
+/* FAQ styles */
+.faq-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #dfe1e5;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 15px;
+    background-color: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #202124;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.faq-question::after {
+    content: '';
+    border: solid #70757a;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
+
+.faq-item.active .faq-question::after {
+    transform: rotate(-135deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: white;
+    padding: 0 15px;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 100px;
+    padding: 15px;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -271,7 +324,7 @@ body {
     .result-button, 
     .result-link {
         width: 100%;
-        margin: 10px 0;  /* 모바일에서도 동일한 margin 적용 */
+        margin: 10px 0;
         font-size: 14px;
         box-sizing: border-box;
         display: block;
@@ -287,45 +340,4 @@ body {
         display: inline-block;
         margin: 5px;
     }
-    .faq-section {
-    width: 100%;
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.faq-item {
-    margin-bottom: 10px;
-    border: 1px solid #dfe1e5;
-    border-radius: 8px;
-}
-
-.faq-question {
-    width: 100%;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 8px;
-}
-
-.faq-answer {
-    display: none;
-    padding: 15px;
-    background-color: white;
-    font-size: 14px;
-    color: #5f6368;
-}
-
-.faq-item.active .faq-answer {
-    display: block;
-}
-
-.faq-item.active .faq-question {
-    border-bottom: 1px solid #dfe1e5;
-    border-radius: 8px 8px 0 0;
-}
-
 }
