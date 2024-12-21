@@ -124,6 +124,14 @@ if (document.getElementById('search-form')) {
     displayRecentSearches();
 }
 
+// FAQ 토글 기능
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        faqItem.classList.toggle('active');
+    });
+});
+
 // Results page functionality
 if (document.getElementById('results')) {
     convertUrl();
@@ -186,12 +194,4 @@ function convertUrl() {
         
         hideLoading();
     }, 1000);
-    // FAQ 토글 기능
-document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-        const faqItem = button.parentElement;
-        faqItem.classList.toggle('active');
-    });
-});
-
 }
