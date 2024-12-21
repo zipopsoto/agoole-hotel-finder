@@ -271,7 +271,7 @@ body {
     .result-button, 
     .result-link {
         width: 100%;
-        margin: 0;
+        margin: 10px 0;  /* 모바일에서도 동일한 margin 적용 */
         font-size: 14px;
         box-sizing: border-box;
         display: block;
