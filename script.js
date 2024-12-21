@@ -80,4 +80,93 @@ function displayRecentSearches() {
     recentSearches.forEach(item => {
         const button = document.createElement('button');
         button.className = 'recent-item';
-        button.innerHTML = `<span
+        button.innerHTML = `<span class="recent-item-title">${item.title}</span>`;
+        button.onclick = () => {
+            window.location.href = `results.html?url=${encodeURIComponent(item.url)}`;
+        };
+        recentList.appendChild(button);
+    });
+}
+
+// Initialize form validation and recent searches
+if (document.getElementById('search-form')) {
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const urlInput = document.getElementById('url-input');
+        const validation = validateUrl(urlInput.value);
+        
+        if (!validation.isValid) {
+            alert(validation.message);
+            return;
+        }
+        
+        saveRecentSearch(urlInput.value);
+        window.location.href = `results.html?url=${encodeURIComponent(urlInput.value)}`;
+    });
+    
+    displayRecentSearches();
+}
+
+// Results page functionality
+if (document.getElementById('results')) {
+    convertUrl();
+}
+
+function convertUrl() {
+    showLoading();
+
+    setTimeout(() => {
+        const inputUrl = getUrlParameter('url');
+        const resultsDiv = document.getElementById('results');
+        const errorDiv = document.getElementById('error-message');
+        resultsDiv.innerHTML = '';
+        errorDiv.innerHTML = '';
+
+        if (!inputUrl) {
+            errorDiv.textContent = 'URL을 입력해주세요.';
+            hideLoading();
+            return;
+        }
+
+        try {
+            const urlObj = new URL(inputUrl);
+            const params = new URLSearchParams(urlObj.search);
+
+            if (!params.has('cid')) {
+                errorDiv.textContent = '입력하신 링크는 아고다 호텔이 아닌 것 같아요.';
+                hideLoading();
+                return;
+            }
+
+            cidList.forEach(item => {
+                params.set('cid', item.cid);
+                const newUrl = `${urlObj.origin}${urlObj.pathname}?${params.toString()}`;
+                
+                if (isMobile()) {
+                    const link = document.createElement('a');
+                    link.href = newUrl;
+                    link.textContent = `${item.name}을 통해 가격 확인`;
+                    link.className = 'result-link';
+                    link.target = '_blank';
+                    resultsDiv.appendChild(link);
+                } else {
+                    const button = document.createElement('button');
+                    button.textContent = `${item.name}을 통해 가격 확인`;
+                    button.className = 'result-button';
+                    button.onclick = function() {
+                        navigator.clipboard.writeText(newUrl).then(() => {
+                            alert('링크가 클립보드에 복사되었습니다.');
+                        });
+                    };
+                    resultsDiv.appendChild(button);
+                }
+            });
+            
+            displayRecentSearches();
+        } catch (error) {
+            errorDiv.textContent = '올바른 URL을 입력해주세요.';
+        }
+        
+        hideLoading();
+    }, 1000);
+}
