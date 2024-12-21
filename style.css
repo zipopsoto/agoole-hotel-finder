@@ -98,26 +98,43 @@ body {
 
 /* Results page styles */
 .results-container {
+    text-align: center;
     width: 100%;
-    max-width: 800px;
-    padding: 20px;
+    max-width: 600px;
     margin: 20px auto;
+    padding: 20px;
 }
 
-.result-link, .result-button {
-    display: block;
-    margin-bottom: 10px;
-    padding: 15px;
+.results-title {
+    font-size: 28px;
+    color: #202124;
+    margin-bottom: 30px;
+}
+
+.results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.result-button, .result-link {
+    width: 100%;
+    padding: 15px 20px;
     background-color: #f8f9fa;
     border: 1px solid #dfe1e5;
     border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
     text-decoration: none;
     color: #1a0dab;
-    cursor: pointer;
 }
 
-.result-link:hover, .result-button:hover {
+.result-button:hover, .result-link:hover {
     background-color: #f1f3f4;
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
 }
 
 #error-message {
@@ -135,6 +152,22 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 20px;
+}
+
+.loading-spinner {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4285f4;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 768px) {
