@@ -1,49 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko-KR">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>변환 결과 - 아고다 최저가 호텔 찾기</title>
-    <meta name="description" content="아고다 호텔의 다양한 최저가 예약 경로를 확인하세요.">
-    <meta name="keywords" content="아고다, 최저가 호텔, CID 변환 결과">
-    <meta name="author" content="AGOOLE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AGOOLE - 검색 결과</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="results-container">
-        <h1 class="results-title">변환 결과</h1>
+        <div class="results-title">변환 결과</div>
+        
         <div id="loading" class="loading-spinner"></div>
-        <div id="error-message"></div>
-        <div class="content-wrapper" style="display: none;">
-            <div class="graph-container">
-                <div class="bar-graph"></div>
+        <div id="error-message" class="error-message"></div>
+        <div id="results" class="results-grid"></div>
+
+        <div class="price-stats-text">
+            평균적으로 구글맵을 경유한 예약이 가장 저렴했어요.
+        </div>
+
+        <a href="index.html" class="back-button">다시 검색하기</a>
+
+        <div id="recent-list" class="recent-searches"></div>
+
+        <div class="faq-section">
+            <div class="faq-item">
+                <button class="faq-question">Q. 어떻게 사용 하나요?</button>
+                <div class="faq-answer">사이트 수정중.</div>
             </div>
-
-            <p class="price-stats-text">평균적으로 구글맵을 경유한 예약이 가장 저렴했어요.</p>
-            
-            <a href="index.html" class="back-button">다시 검색하기</a>
-
-            <div id="results" class="results-grid"></div>
-
-            <div id="recent-searches" class="recent-searches">
-                <h3>최근 검색 기록</h3>
-                <div id="recent-list"></div>
-            </div>
-
-            <div class="faq-section">
-                <div class="faq-item">
-                    <button class="faq-question">Q. 어떻게 사용 하나요?</button>
-                    <div class="faq-answer">
-                        <p>사이트 수정중.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">Q. 어떤 원리로 최저가를 찾나요?</button>
-                    <div class="faq-answer">
-                        <p>사이트 수정중. (CID 원리)</p>
-                    </div>
-                </div>
+            <div class="faq-item">
+                <button class="faq-question">Q. 어떤 원리로 최저가를 찾나요?</button>
+                <div class="faq-answer">사이트 수정중. (CID 원리)</div>
             </div>
         </div>
     </div>
