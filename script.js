@@ -18,30 +18,18 @@ function getUrlParameter(name) {
 
 function showLoading() {
     const loadingEl = document.getElementById('loading');
-    const resultsGrid = document.getElementById('results');
-    const graphContainer = document.querySelector('.graph-container');
-    const priceStats = document.querySelector('.price-stats-text');
-    const backButton = document.querySelector('.back-button');
+    const contentWrapper = document.querySelector('.content-wrapper');
     
     if (loadingEl) loadingEl.style.display = 'block';
-    if (resultsGrid) resultsGrid.style.display = 'none';
-    if (graphContainer) graphContainer.style.display = 'none';
-    if (priceStats) priceStats.style.display = 'none';
-    if (backButton) backButton.style.display = 'none';
+    if (contentWrapper) contentWrapper.style.display = 'none';
 }
 
 function hideLoading() {
     const loadingEl = document.getElementById('loading');
-    const resultsGrid = document.getElementById('results');
-    const graphContainer = document.querySelector('.graph-container');
-    const priceStats = document.querySelector('.price-stats-text');
-    const backButton = document.querySelector('.back-button');
+    const contentWrapper = document.querySelector('.content-wrapper');
     
     if (loadingEl) loadingEl.style.display = 'none';
-    if (resultsGrid) resultsGrid.style.display = 'flex';
-    if (graphContainer) graphContainer.style.display = 'block';
-    if (priceStats) priceStats.style.display = 'block';
-    if (backButton) backButton.style.display = 'inline-block';
+    if (contentWrapper) contentWrapper.style.display = 'block';
 }
 
 function createBarGraph() {
