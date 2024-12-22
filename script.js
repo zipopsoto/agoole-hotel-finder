@@ -1,27 +1,31 @@
 const cidList = [
-const cidList = [
+    // [검색 카테고리]
     { name: "구글지도1", cid: "1833981", avgPrice: 12 },
     { name: "구글지도2", cid: "1917614", avgPrice: 24 },
     { name: "구글지도3", cid: "1829968", avgPrice: 36 },
-    { name: "신한카드", cid: "1760133", avgPrice: 38 },
-    { name: "토스", cid: "1917334", avgPrice: 29 },
-    { name: "에어서울", cid: "1800120", avgPrice: 32 },
     { name: "구글 검색1", cid: "1908612" },
     { name: "구글 검색2", cid: "1922868" },
     { name: "구글 검색3", cid: "1922887" },
     { name: "네이버 검색1", cid: "1891504" },
+    
+    // [카드사 카테고리]
     { name: "국민카드", cid: "1563295" },
     { name: "우리카드", cid: "1654104" },
     { name: "우리(마스터)", cid: "1932810" },
     { name: "BC카드", cid: "1748498" },
     { name: "신한(마스터)", cid: "1917257" },
+    { name: "신한카드", cid: "1760133", avgPrice: 38 },
+    { name: "토스", cid: "1917334", avgPrice: 29 },
     { name: "하나", cid: "1729471" },
     { name: "카카오페이", cid: "1845109" },
     { name: "마스터카드", cid: "1889572" },
     { name: "유니온페이", cid: "1801110" },
     { name: "비자", cid: "1889319" },
+    
+    // [항공사 카테고리]
     { name: "대한항공(적립)", cid: "1904827" },
-    { name: "아시아나항공(적립)", cid: "1806212" }
+    { name: "아시아나항공(적립)", cid: "1806212" },
+    { name: "에어서울", cid: "1800120", avgPrice: 32 }
 ];
 
 function isMobile() {
