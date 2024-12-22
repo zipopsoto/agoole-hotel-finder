@@ -25,7 +25,7 @@ body {
 }
 
 .logo {
-    font-size: 40px;
+    font-size: 50px;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -47,7 +47,7 @@ body {
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: 18px;
     color: #202124;
     margin-bottom: 20px;
 }
@@ -131,52 +131,4 @@ body {
 .recent-item {
     background-color: #f1f3f4;
     border: 1px solid #dfe1e5;
-    border-radius: 20px;
-    padding: 8px 15px;
-    margin: 5px;
-    font-size: 12px;
-}
-
-.faq-section {
-    width: 100%;
-}
-
-.faq-item {
-    border-bottom: 1px solid #dfe1e5;
-}
-
-.faq-question {
-    width: 100%;
-    padding: 15px;
-    text-align: left;
-    background: none;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.faq-answer {
-    display: none;
-    padding: 15px;
-    font-size: 12px;
-}
-
-.faq-item.active .faq-answer {
-    display: block;
-}
-
-.loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4285f4;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-    display: none;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+    border-radius: 20
