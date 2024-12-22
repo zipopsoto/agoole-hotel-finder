@@ -180,6 +180,8 @@ body {
     color: #202124;
     white-space: nowrap;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: white;  /* 배경색 추가 */
+    padding: 0 4px;  /* 좌우 여백 추가 */
 }
 
 .bar-value {
@@ -221,7 +223,7 @@ body {
     align-items: center;
     width: 100%;
     max-width: 450px;
-    gap: 45px;
+    gap: 20px;  /* 45px에서 20px로 수정 */
     margin: 0 auto 35px;
 }
 
