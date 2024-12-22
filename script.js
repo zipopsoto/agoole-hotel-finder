@@ -1,31 +1,13 @@
 const cidList = [
     // [검색 카테고리]
-    { name: "구글지도1", cid: "1833981", avgPrice: 12 },
-    { name: "구글지도2", cid: "1917614", avgPrice: 24 },
-    { name: "구글지도3", cid: "1829968", avgPrice: 36 },
-    { name: "구글 검색1", cid: "1908612" },
-    { name: "구글 검색2", cid: "1922868" },
-    { name: "구글 검색3", cid: "1922887" },
-    { name: "네이버 검색1", cid: "1891504" },
-    
+    { name: "구글지도", cid: "1833981" },
+    { name: "구글검색", cid: "1917614" },
+    { name: "네이버", cid: "1829968" },
     // [카드사 카테고리]
     { name: "국민카드", cid: "1563295" },
     { name: "우리카드", cid: "1654104" },
-    { name: "우리(마스터)", cid: "1932810" },
-    { name: "BC카드", cid: "1748498" },
-    { name: "신한(마스터)", cid: "1917257" },
-    { name: "신한카드", cid: "1760133", avgPrice: 38 },
-    { name: "토스", cid: "1917334", avgPrice: 29 },
-    { name: "하나", cid: "1729471" },
-    { name: "카카오페이", cid: "1845109" },
-    { name: "마스터카드", cid: "1889572" },
-    { name: "유니온페이", cid: "1801110" },
-    { name: "비자", cid: "1889319" },
-    
-    // [항공사 카테고리]
-    { name: "대한항공(적립)", cid: "1904827" },
-    { name: "아시아나항공(적립)", cid: "1806212" },
-    { name: "에어서울", cid: "1800120", avgPrice: 32 }
+    { name: "신한카드", cid: "1760133" },
+    { name: "토스", cid: "1917334" }
 ];
 
 function isMobile() {
@@ -39,48 +21,12 @@ function getUrlParameter(name) {
 
 function showLoading() {
     const loadingEl = document.getElementById('loading');
-    const contentWrapper = document.querySelector('.content-wrapper');
-    
     if (loadingEl) loadingEl.style.display = 'block';
-    if (contentWrapper) contentWrapper.style.display = 'none';
 }
 
 function hideLoading() {
     const loadingEl = document.getElementById('loading');
-    const contentWrapper = document.querySelector('.content-wrapper');
-    
     if (loadingEl) loadingEl.style.display = 'none';
-    if (contentWrapper) contentWrapper.style.display = 'block';
-}
-
-function createBarGraph() {
-    const graphContainer = document.querySelector('.bar-graph');
-    if (!graphContainer) return;
-
-    graphContainer.innerHTML = '';
-    
-    const graphData = cidList.filter(item => item.hasOwnProperty('avgPrice'));
-    const maxPrice = Math.max(...graphData.map(item => item.avgPrice));
-    const lowestPrice = Math.min(...graphData.map(item => item.avgPrice));
-    
-    graphData.forEach(item => {
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        const height = (item.avgPrice / maxPrice) * 100;
-        bar.style.height = `${height}%`;
-        
-        const label = document.createElement('div');
-        label.className = `bar-label ${item.avgPrice === lowestPrice ? 'lowest-price' : ''}`;
-        label.textContent = item.name;
-        
-        const value = document.createElement('div');
-        value.className = 'bar-value';
-        value.textContent = item.avgPrice;
-        
-        bar.appendChild(label);
-        bar.appendChild(value);
-        graphContainer.appendChild(bar);
-    });
 }
 
 function validateUrl(url) {
@@ -89,12 +35,10 @@ function validateUrl(url) {
         if (!urlObj.hostname.includes('agoda.com')) {
             return { isValid: false, message: '아고다 호텔 링크가 아닙니다.' };
         }
-        
         const params = new URLSearchParams(urlObj.search);
         if (!params.has('cid')) {
             return { isValid: false, message: '올바른 아고다 호텔 링크가 아닙니다.' };
         }
-        
         return { isValid: true };
     } catch (error) {
         return { isValid: false, message: '올바른 URL 형식이 아닙니다.' };
@@ -114,12 +58,7 @@ function getHotelTitle(url) {
 
 function saveRecentSearch(url) {
     let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
-    const searchItem = {
-        url: url,
-        title: getHotelTitle(url),
-        timestamp: new Date().getTime()
-    };
-    
+    const searchItem = { url: url, title: getHotelTitle(url), timestamp: new Date().getTime() };
     recentSearches = recentSearches.filter(item => item.url !== url);
     recentSearches.unshift(searchItem);
     recentSearches = recentSearches.slice(0, 5);
@@ -129,14 +68,12 @@ function saveRecentSearch(url) {
 function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
-    
     const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
     recentList.innerHTML = '';
-    
     recentSearches.forEach(item => {
         const button = document.createElement('button');
         button.className = 'recent-item';
-        button.innerHTML = `<span class="recent-item-title">${item.title}</span>`;
+        button.innerHTML = `${item.title}`;
         button.onclick = () => {
             window.location.href = `results.html?url=${encodeURIComponent(item.url)}`;
         };
@@ -144,38 +81,25 @@ function displayRecentSearches() {
     });
 }
 
-function showCopiedMessage(button) {
-    const originalText = button.textContent;
-    button.innerHTML = '<span class="copied-text">복사 완료!</span>';
-    setTimeout(() => {
-        button.textContent = originalText;
-    }, 2000);
-}
-
 if (document.getElementById('search-form')) {
     document.getElementById('search-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const urlInput = document.getElementById('url-input');
         const validation = validateUrl(urlInput.value);
-        
         if (!validation.isValid) {
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message';
             errorDiv.textContent = validation.message;
-            
             const existingError = document.querySelector('.error-message');
             if (existingError) {
                 existingError.remove();
             }
-            
             document.querySelector('.search-container').appendChild(errorDiv);
             return;
         }
-        
         saveRecentSearch(urlInput.value);
         window.location.href = `results.html?url=${encodeURIComponent(urlInput.value)}`;
     });
-    
     displayRecentSearches();
 }
 
@@ -192,7 +116,6 @@ if (document.getElementById('results')) {
 
 function convertUrl() {
     showLoading();
-
     setTimeout(() => {
         const inputUrl = getUrlParameter('url');
         const resultsDiv = document.getElementById('results');
@@ -209,7 +132,6 @@ function convertUrl() {
         try {
             const urlObj = new URL(inputUrl);
             const params = new URLSearchParams(urlObj.search);
-
             if (!params.has('cid')) {
                 errorDiv.textContent = '입력하신 링크는 아고다 호텔이 아닌 것 같아요.';
                 hideLoading();
@@ -217,56 +139,19 @@ function convertUrl() {
             }
 
             // 검색 카테고리 생성
-            const searchSection = document.createElement('div');
-            searchSection.className = 'category-section';
-            searchSection.innerHTML = '<h3 class="category-title">[검색 카테고리]</h3>';
-            cidList.slice(0, 7).forEach(item => createButton(item, urlObj, params, searchSection));
-            resultsDiv.appendChild(searchSection);
-
-            // 카드사 카테고리 생성
-            const cardsSection = document.createElement('div');
-            cardsSection.className = 'category-section';
-            cardsSection.innerHTML = '<h3 class="category-title">[카드사 카테고리]</h3>';
-            cidList.slice(7, 19).forEach(item => createButton(item, urlObj, params, cardsSection));
-            resultsDiv.appendChild(cardsSection);
-
-            // 항공사 카테고리 생성
-            const airlinesSection = document.createElement('div');
-            airlinesSection.className = 'category-section';
-            airlinesSection.innerHTML = '<h3 class="category-title">[항공사 카테고리]</h3>';
-            cidList.slice(19).forEach(item => createButton(item, urlObj, params, airlinesSection));
-            resultsDiv.appendChild(airlinesSection);
-
-            createBarGraph();
-            displayRecentSearches();
-        } catch (error) {
-            errorDiv.textContent = '올바른 URL을 입력해주세요.';
-        }
-        
-        hideLoading();
-    }, 1000);
-}
-
-function createButton(item, urlObj, params, section) {
-    params.set('cid', item.cid);
-    const newUrl = `${urlObj.origin}${urlObj.pathname}?${params.toString()}`;
-    
-    if (isMobile()) {
-        const link = document.createElement('a');
-        link.href = newUrl;
-        link.textContent = `${item.name}을 통해 가격 확인`;
-        link.className = 'result-link';
-        link.target = '_blank';
-        section.appendChild(link);
-    } else {
-        const button = document.createElement('button');
-        button.textContent = `${item.name}을 통해 가격 확인`;
-        button.className = 'result-button';
-        button.onclick = function() {
-            navigator.clipboard.writeText(newUrl).then(() => {
-                showCopiedMessage(this);
+            cidList.forEach(category => {
+                const button = document.createElement('a');
+                button.href = `${inputUrl}&cid=${category.cid}`;
+                button.target = '_blank';
+                button.className = 'result-link';
+                button.textContent = `${category.name} 경유 바로가기`;
+                resultsDiv.appendChild(button);
             });
-        };
-        section.appendChild(button);
-    }
+
+            hideLoading();
+        } catch (error) {
+            errorDiv.textContent = '유효하지 않은 URL입니다.';
+            hideLoading();
+        }
+    }, 1000);
 }
