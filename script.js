@@ -1,7 +1,10 @@
 const cidList = [
-    { name: "구글맵", cid: "1833981" },
-    { name: "국민카드", cid: "1917614" },
-    { name: "신한카드", cid: "1829968" }
+    { name: "구글맵", cid: "1833981", avgPrice: 12 },  // 가장 낮은 값으로 설정
+    { name: "국민카드", cid: "1917614", avgPrice: 24 },
+    { name: "신한카드", cid: "1829968", avgPrice: 36 },
+    { name: "카카오페이", cid: "1234567", avgPrice: 38 },
+    { name: "현대카드", cid: "7654321", avgPrice: 29 },
+    { name: "삼성페이", cid: "9876543", avgPrice: 32 }
 ];
 
 function isMobile() {
@@ -27,18 +30,33 @@ function hideLoading() {
     if (resultsEl) resultsEl.style.display = 'block';
 }
 
-async function getOgImage(url) {
-    try {
-        const response = await fetch(url);
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const ogImage = doc.querySelector('meta[property="og:image"]');
-        return ogImage ? ogImage.getAttribute('content') : null;
-    } catch (error) {
-        console.error('Error fetching OG image:', error);
-        return null;
-    }
+function createBarGraph() {
+    const graphContainer = document.querySelector('.bar-graph');
+    if (!graphContainer) return;
+
+    graphContainer.innerHTML = '';
+    
+    const maxPrice = Math.max(...cidList.map(item => item.avgPrice));
+    const lowestPrice = Math.min(...cidList.map(item => item.avgPrice));
+    
+    cidList.forEach(item => {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        const height = (item.avgPrice / maxPrice) * 100;
+        bar.style.height = `${height}%`;
+        
+        const label = document.createElement('div');
+        label.className = `bar-label ${item.avgPrice === lowestPrice ? 'lowest-price' : ''}`;
+        label.textContent = item.name;
+        
+        const value = document.createElement('div');
+        value.className = 'bar-value';
+        value.textContent = item.avgPrice;
+        
+        bar.appendChild(label);
+        bar.appendChild(value);
+        graphContainer.appendChild(bar);
+    });
 }
 
 function validateUrl(url) {
@@ -149,16 +167,16 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Results page functionality
 if (document.getElementById('results')) {
     convertUrl();
+    createBarGraph();
 }
 
-async function convertUrl() {
+function convertUrl() {
     showLoading();
 
-    setTimeout(async () => {
+    setTimeout(() => {
         const inputUrl = getUrlParameter('url');
         const resultsDiv = document.getElementById('results');
         const errorDiv = document.getElementById('error-message');
-        const hotelImageDiv = document.getElementById('hotel-image');
         resultsDiv.innerHTML = '';
         errorDiv.innerHTML = '';
 
@@ -176,17 +194,6 @@ async function convertUrl() {
                 errorDiv.textContent = '입력하신 링크는 아고다 호텔이 아닌 것 같아요.';
                 hideLoading();
                 return;
-            }
-
-            // OG 이미지 가져오기 및 표시
-            const ogImage = await getOgImage(inputUrl);
-            if (ogImage && hotelImageDiv) {
-                const img = document.createElement('img');
-                img.src = ogImage;
-                img.alt = '호텔 이미지';
-                img.className = 'hotel-og-image';
-                hotelImageDiv.innerHTML = '';
-                hotelImageDiv.appendChild(img);
             }
 
             cidList.forEach(item => {
