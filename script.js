@@ -27,6 +27,7 @@ const cidList = [
     { name: "아시아나항공(적립)", cid: "1806212" },
     { name: "에어서울", cid: "1800120", avgPrice: 32 }
 ];
+
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -51,6 +52,7 @@ function hideLoading() {
     if (loadingEl) loadingEl.style.display = 'none';
     if (contentWrapper) contentWrapper.style.display = 'block';
 }
+
 function createBarGraph() {
     const graphContainer = document.querySelector('.bar-graph');
     if (!graphContainer) return;
@@ -80,6 +82,7 @@ function createBarGraph() {
         graphContainer.appendChild(bar);
     });
 }
+
 function validateUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -122,6 +125,7 @@ function saveRecentSearch(url) {
     recentSearches = recentSearches.slice(0, 5);
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
 }
+
 function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
@@ -174,6 +178,7 @@ if (document.getElementById('search-form')) {
     
     displayRecentSearches();
 }
+
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
         const faqItem = button.parentElement;
