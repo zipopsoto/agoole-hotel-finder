@@ -1,5 +1,5 @@
 const cidList = [
-    { name: "구글맵", cid: "1833981", avgPrice: 12 },  // 가장 낮은 값으로 설정
+    { name: "구글맵", cid: "1833981", avgPrice: 12 },
     { name: "국민카드", cid: "1917614", avgPrice: 24 },
     { name: "신한카드", cid: "1829968", avgPrice: 36 },
     { name: "카카오페이", cid: "1234567", avgPrice: 38 },
@@ -18,16 +18,16 @@ function getUrlParameter(name) {
 
 function showLoading() {
     const loadingEl = document.getElementById('loading');
-    const resultsEl = document.getElementById('results');
+    const contentWrapper = document.querySelector('.content-wrapper');
     if (loadingEl) loadingEl.style.display = 'block';
-    if (resultsEl) resultsEl.style.display = 'none';
+    if (contentWrapper) contentWrapper.style.display = 'none';
 }
 
 function hideLoading() {
     const loadingEl = document.getElementById('loading');
-    const resultsEl = document.getElementById('results');
+    const contentWrapper = document.querySelector('.content-wrapper');
     if (loadingEl) loadingEl.style.display = 'none';
-    if (resultsEl) resultsEl.style.display = 'block';
+    if (contentWrapper) contentWrapper.style.display = 'block';
 }
 
 function createBarGraph() {
@@ -167,7 +167,6 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Results page functionality
 if (document.getElementById('results')) {
     convertUrl();
-    createBarGraph();
 }
 
 function convertUrl() {
@@ -220,6 +219,7 @@ function convertUrl() {
                 }
             });
             
+            createBarGraph();
             displayRecentSearches();
         } catch (error) {
             errorDiv.textContent = '올바른 URL을 입력해주세요.';
