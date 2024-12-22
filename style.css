@@ -1,3 +1,4 @@
+/* style.css */
 body {
     display: flex;
     flex-direction: column;
@@ -128,21 +129,6 @@ body {
     align-items: center;
 }
 
-.hotel-image-container {
-    width: 100%;
-    max-width: 450px;
-    margin-bottom: 30px;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.hotel-og-image {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-}
-
 .results-title {
     font-size: 28px;
     color: #202124;
@@ -158,6 +144,78 @@ body {
     max-width: 450px;
     gap: 45px;
     margin-bottom: 35px;
+}
+
+/* Price stats and graph styles */
+.price-stats {
+    width: 100%;
+    max-width: 450px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.price-stats-text {
+    color: #ea4335;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.graph-container {
+    width: 100%;
+    height: 300px;
+    background-color: #fff;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #dfe1e5;
+    border-radius: 8px;
+}
+
+.bar-graph {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 30px;
+    position: relative;
+    background-image: linear-gradient(180deg, 
+        #dfe1e5 0%, #dfe1e5 1px, 
+        transparent 1px, transparent 100%);
+    background-size: 100% 30px;
+    background-position: 0 0;
+}
+
+.bar {
+    width: 35px;
+    background-color: #4285f4;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s ease;
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #202124;
+    white-space: nowrap;
+}
+
+.bar-value {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #70757a;
+}
+
+.lowest-price {
+    color: #ea4335;
+    font-weight: bold;
 }
 
 .result-button, .result-link {
@@ -360,10 +418,5 @@ body {
     .recent-item {
         display: inline-block;
         margin: 5px;
-    }
-
-    .hotel-image-container {
-        width: 90%;
-        margin-bottom: 20px;
     }
 }
