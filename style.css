@@ -43,6 +43,7 @@ body {
     color: #202124;
     margin: 15px 0 10px;
 }
+
 .disclaimer {
     color: #ea4335;
     font-size: 14px;
@@ -143,8 +144,9 @@ body {
     position: relative;
     border: 1px solid #dfe1e5;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
 }
+
 .bar-graph {
     display: flex;
     justify-content: space-around;
@@ -194,6 +196,7 @@ body {
     color: #ea4335;
     font-weight: bold;
 }
+
 .price-stats-text {
     color: #ea4335;
     font-weight: bold;
@@ -253,6 +256,7 @@ body {
     display: block;
     box-sizing: border-box;
 }
+
 .result-button:hover, 
 .result-link:hover {
     background-color: #f1f3f4;
@@ -300,7 +304,6 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
 .recent-item:hover {
     background-color: #f1f3f4;
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
@@ -429,3 +432,5 @@ body {
         margin: 5px;
     }
 }
+
+
