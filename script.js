@@ -27,6 +27,20 @@ function hideLoading() {
     if (resultsEl) resultsEl.style.display = 'block';
 }
 
+async function getOgImage(url) {
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const ogImage = doc.querySelector('meta[property="og:image"]');
+        return ogImage ? ogImage.getAttribute('content') : null;
+    } catch (error) {
+        console.error('Error fetching OG image:', error);
+        return null;
+    }
+}
+
 function validateUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -137,13 +151,14 @@ if (document.getElementById('results')) {
     convertUrl();
 }
 
-function convertUrl() {
+async function convertUrl() {
     showLoading();
 
-    setTimeout(() => {
+    setTimeout(async () => {
         const inputUrl = getUrlParameter('url');
         const resultsDiv = document.getElementById('results');
         const errorDiv = document.getElementById('error-message');
+        const hotelImageDiv = document.getElementById('hotel-image');
         resultsDiv.innerHTML = '';
         errorDiv.innerHTML = '';
 
@@ -161,6 +176,17 @@ function convertUrl() {
                 errorDiv.textContent = '입력하신 링크는 아고다 호텔이 아닌 것 같아요.';
                 hideLoading();
                 return;
+            }
+
+            // OG 이미지 가져오기 및 표시
+            const ogImage = await getOgImage(inputUrl);
+            if (ogImage && hotelImageDiv) {
+                const img = document.createElement('img');
+                img.src = ogImage;
+                img.alt = '호텔 이미지';
+                img.className = 'hotel-og-image';
+                hotelImageDiv.innerHTML = '';
+                hotelImageDiv.appendChild(img);
             }
 
             cidList.forEach(item => {
