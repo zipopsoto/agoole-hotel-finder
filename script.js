@@ -4,9 +4,30 @@ const cidList = [
     { name: "신한카드", cid: "1829968", avgPrice: 36 },
     { name: "카카오페이", cid: "1234567", avgPrice: 38 },
     { name: "현대카드", cid: "7654321", avgPrice: 29 },
-    { name: "삼성페이", cid: "9876543", avgPrice: 32 }
+    { name: "삼성페이", cid: "9876543", avgPrice: 32 },
+    { name: "구글지도1", cid: "1833981" },
+    { name: "구글지도2", cid: "1917614" },
+    { name: "구글지도3", cid: "1829968" },
+    { name: "구글 검색1", cid: "1908612" },
+    { name: "구글 검색2", cid: "1922868" },
+    { name: "구글 검색3", cid: "1922887" },
+    { name: "네이버 검색1", cid: "1891504" },
+    { name: "국민카드", cid: "1563295" },
+    { name: "우리카드", cid: "1654104" },
+    { name: "우리(마스터)", cid: "1932810" },
+    { name: "BC카드", cid: "1748498" },
+    { name: "신한(마스터)", cid: "1917257" },
+    { name: "신한카드", cid: "1760133" },
+    { name: "토스", cid: "1917334" },
+    { name: "하나", cid: "1729471" },
+    { name: "카카오페이", cid: "1845109" },
+    { name: "마스터카드", cid: "1889572" },
+    { name: "유니온페이", cid: "1801110" },
+    { name: "비자", cid: "1889319" },
+    { name: "대한항공(적립)", cid: "1904827" },
+    { name: "아시아나항공(적립)", cid: "1806212" },
+    { name: "에어서울", cid: "1800120" }
 ];
-
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -31,17 +52,16 @@ function hideLoading() {
     if (loadingEl) loadingEl.style.display = 'none';
     if (contentWrapper) contentWrapper.style.display = 'block';
 }
-
 function createBarGraph() {
     const graphContainer = document.querySelector('.bar-graph');
     if (!graphContainer) return;
 
     graphContainer.innerHTML = '';
     
-    const maxPrice = Math.max(...cidList.map(item => item.avgPrice));
-    const lowestPrice = Math.min(...cidList.map(item => item.avgPrice));
+    const maxPrice = Math.max(...cidList.slice(0, 6).map(item => item.avgPrice));
+    const lowestPrice = Math.min(...cidList.slice(0, 6).map(item => item.avgPrice));
     
-    cidList.forEach(item => {
+    cidList.slice(0, 6).forEach(item => {
         const bar = document.createElement('div');
         bar.className = 'bar';
         const height = (item.avgPrice / maxPrice) * 100;
@@ -130,7 +150,6 @@ function showCopiedMessage(button) {
     }, 2000);
 }
 
-// Initialize form validation and recent searches
 if (document.getElementById('search-form')) {
     document.getElementById('search-form').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -158,7 +177,6 @@ if (document.getElementById('search-form')) {
     displayRecentSearches();
 }
 
-// FAQ 토글 기능
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
         const faqItem = button.parentElement;
@@ -166,7 +184,6 @@ document.querySelectorAll('.faq-question').forEach(button => {
     });
 });
 
-// Results page functionality
 if (document.getElementById('results')) {
     convertUrl();
 }
