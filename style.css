@@ -128,6 +128,21 @@ body {
     align-items: center;
 }
 
+.hotel-image-container {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.hotel-og-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+}
+
 .results-title {
     font-size: 28px;
     color: #202124;
@@ -345,5 +360,10 @@ body {
     .recent-item {
         display: inline-block;
         margin: 5px;
+    }
+
+    .hotel-image-container {
+        width: 90%;
+        margin-bottom: 20px;
     }
 }
