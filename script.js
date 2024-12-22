@@ -27,7 +27,6 @@ const cidList = [
     { name: "아시아나항공(적립)", cid: "1806212" },
     { name: "에어서울", cid: "1800120", avgPrice: 32 }
 ];
-
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -58,10 +57,11 @@ function createBarGraph() {
 
     graphContainer.innerHTML = '';
     
-    const maxPrice = Math.max(...cidList.slice(0, 6).map(item => item.avgPrice));
-    const lowestPrice = Math.min(...cidList.slice(0, 6).map(item => item.avgPrice));
+    const graphData = cidList.filter(item => item.hasOwnProperty('avgPrice'));
+    const maxPrice = Math.max(...graphData.map(item => item.avgPrice));
+    const lowestPrice = Math.min(...graphData.map(item => item.avgPrice));
     
-    cidList.slice(0, 6).forEach(item => {
+    graphData.forEach(item => {
         const bar = document.createElement('div');
         bar.className = 'bar';
         const height = (item.avgPrice / maxPrice) * 100;
@@ -80,7 +80,6 @@ function createBarGraph() {
         graphContainer.appendChild(bar);
     });
 }
-
 function validateUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -123,7 +122,6 @@ function saveRecentSearch(url) {
     recentSearches = recentSearches.slice(0, 5);
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
 }
-
 function displayRecentSearches() {
     const recentList = document.getElementById('recent-list');
     if (!recentList) return;
@@ -176,7 +174,6 @@ if (document.getElementById('search-form')) {
     
     displayRecentSearches();
 }
-
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
         const faqItem = button.parentElement;
@@ -214,30 +211,27 @@ function convertUrl() {
                 return;
             }
 
-            cidList.forEach(item => {
-                params.set('cid', item.cid);
-                const newUrl = `${urlObj.origin}${urlObj.pathname}?${params.toString()}`;
-                
-                if (isMobile()) {
-                    const link = document.createElement('a');
-                    link.href = newUrl;
-                    link.textContent = `${item.name}을 통해 가격 확인`;
-                    link.className = 'result-link';
-                    link.target = '_blank';
-                    resultsDiv.appendChild(link);
-                } else {
-                    const button = document.createElement('button');
-                    button.textContent = `${item.name}을 통해 가격 확인`;
-                    button.className = 'result-button';
-                    button.onclick = function() {
-                        navigator.clipboard.writeText(newUrl).then(() => {
-                            showCopiedMessage(this);
-                        });
-                    };
-                    resultsDiv.appendChild(button);
-                }
-            });
-            
+            // 검색 카테고리 생성
+            const searchSection = document.createElement('div');
+            searchSection.className = 'category-section';
+            searchSection.innerHTML = '<h3 class="category-title">[검색 카테고리]</h3>';
+            cidList.slice(0, 7).forEach(item => createButton(item, urlObj, params, searchSection));
+            resultsDiv.appendChild(searchSection);
+
+            // 카드사 카테고리 생성
+            const cardsSection = document.createElement('div');
+            cardsSection.className = 'category-section';
+            cardsSection.innerHTML = '<h3 class="category-title">[카드사 카테고리]</h3>';
+            cidList.slice(7, 19).forEach(item => createButton(item, urlObj, params, cardsSection));
+            resultsDiv.appendChild(cardsSection);
+
+            // 항공사 카테고리 생성
+            const airlinesSection = document.createElement('div');
+            airlinesSection.className = 'category-section';
+            airlinesSection.innerHTML = '<h3 class="category-title">[항공사 카테고리]</h3>';
+            cidList.slice(19).forEach(item => createButton(item, urlObj, params, airlinesSection));
+            resultsDiv.appendChild(airlinesSection);
+
             createBarGraph();
             displayRecentSearches();
         } catch (error) {
@@ -246,4 +240,28 @@ function convertUrl() {
         
         hideLoading();
     }, 1000);
+}
+
+function createButton(item, urlObj, params, section) {
+    params.set('cid', item.cid);
+    const newUrl = `${urlObj.origin}${urlObj.pathname}?${params.toString()}`;
+    
+    if (isMobile()) {
+        const link = document.createElement('a');
+        link.href = newUrl;
+        link.textContent = `${item.name}을 통해 가격 확인`;
+        link.className = 'result-link';
+        link.target = '_blank';
+        section.appendChild(link);
+    } else {
+        const button = document.createElement('button');
+        button.textContent = `${item.name}을 통해 가격 확인`;
+        button.className = 'result-button';
+        button.onclick = function() {
+            navigator.clipboard.writeText(newUrl).then(() => {
+                showCopiedMessage(this);
+            });
+        };
+        section.appendChild(button);
+    }
 }
