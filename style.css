@@ -43,7 +43,6 @@ body {
     color: #202124;
     margin: 15px 0 10px;
 }
-
 .disclaimer {
     color: #ea4335;
     font-size: 14px;
@@ -101,7 +100,6 @@ body {
     cursor: pointer;
     font-size: 14px;
 }
-
 .search-button:hover {
     background-color: #303134;
 }
@@ -145,9 +143,8 @@ body {
     position: relative;
     border: 1px solid #dfe1e5;
     border-radius: 8px;
-    margin: 0 auto 10px;
+    margin-bottom: 10px;
 }
-
 .bar-graph {
     display: flex;
     justify-content: space-around;
@@ -180,8 +177,8 @@ body {
     color: #202124;
     white-space: nowrap;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: white;  /* 배경색 추가 */
-    padding: 0 4px;  /* 좌우 여백 추가 */
+    background-color: white;
+    padding: 0 4px;
 }
 
 .bar-value {
@@ -197,7 +194,6 @@ body {
     color: #ea4335;
     font-weight: bold;
 }
-
 .price-stats-text {
     color: #ea4335;
     font-weight: bold;
@@ -217,17 +213,31 @@ body {
     border-radius: 20px;
 }
 
+.category-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.category-title {
+    color: #202124;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    margin: 0 0 15px 0;
+}
+
 .results-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 450px;
-    gap: 20px;  /* 45px에서 20px로 수정 */
+    gap: 20px;
     margin: 0 auto 35px;
 }
 
-.result-button, .result-link {
+.result-button, 
+.result-link {
     width: 100%;
     padding: 15px 20px;
     margin: 0;
@@ -243,8 +253,8 @@ body {
     display: block;
     box-sizing: border-box;
 }
-
-.result-button:hover, .result-link:hover {
+.result-button:hover, 
+.result-link:hover {
     background-color: #f1f3f4;
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
 }
@@ -397,7 +407,7 @@ body {
     .results-grid {
         width: 90%;
         margin: 0 auto 35px;
-        gap: 45px;
+        gap: 20px;
     }
     
     .result-button, 
