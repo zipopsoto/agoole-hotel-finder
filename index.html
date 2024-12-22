@@ -1,53 +1,41 @@
 <!DOCTYPE html>
-<html lang="ko-KR">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>아고다 최저가 호텔 찾기</title>
-    <meta name="description" content="아고다 호텔의 다양한 최저가 예약 경로를 확인하세요.">
-    <meta name="keywords" content="아고다, 최저가 호텔, CID 변환">
-    <meta name="author" content="AGOOLE">
+    <title>AGOOLE - 아고다 최저가 호텔 찾기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="main-container">
-        <h1 class="logo">
-            <span class="blue">A</span><span class="red">G</span><span class="yellow">O</span><span class="blue">O</span><span class="green">L</span><span class="red">E</span>
-        </h1>
-        <p class="by-text">by AGOOLE</p>
-        <h2 class="subtitle">아고다 최저가 호텔 찾기</h2>
-        <p class="disclaimer">※ 현재는 아고다만 지원됩니다.</p>
-
-        <form id="search-form">
-            <div class="search-container">
-                <div class="search-box-wrapper">
-                    <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#70757a"/>
-                    </svg>
-                    <input type="url" id="url-input" placeholder="아고다 호텔 링크를 입력하세요." required>
-                    <button type="submit" class="search-button">검색</button>
-                </div>
+        <div class="logo">
+            <span class="blue">A</span>
+            <span class="red">G</span>
+            <span class="yellow">O</span>
+            <span class="green">O</span>
+            <span class="blue">L</span>
+            <span class="red">E</span>
+        </div>
+        <div class="by-text">by AGOOLE</div>
+        <div class="subtitle">아고다 최저가 호텔 찾기</div>
+        
+        <form id="search-form" class="search-container">
+            <div class="search-box-wrapper">
+                <input type="text" id="url-input" placeholder="아고다 호텔 URL을 입력하세요" required>
+                <button type="submit" class="search-button">검색</button>
             </div>
         </form>
 
-        <div id="recent-searches" class="recent-searches">
-            <h3>최근 검색 기록</h3>
-            <div id="recent-list"></div>
-        </div>
+        <div id="recent-list" class="recent-searches"></div>
 
         <div class="faq-section">
             <div class="faq-item">
                 <button class="faq-question">Q. 어떻게 사용 하나요?</button>
-                <div class="faq-answer">
-                    <p>사이트 수정중.</p>
-                </div>
+                <div class="faq-answer">사이트 수정중.</div>
             </div>
-            
             <div class="faq-item">
                 <button class="faq-question">Q. 어떤 원리로 최저가를 찾나요?</button>
-                <div class="faq-answer">
-                    <p>사이트 수정중. (CID 원리)</p>
-                </div>
+                <div class="faq-answer">사이트 수정중. (CID 원리)</div>
             </div>
         </div>
     </div>
